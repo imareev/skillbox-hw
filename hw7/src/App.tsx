@@ -10,6 +10,9 @@ import { CardsList } from "./shared/CardsList";
 import { assingId, generateId, generateRandomString } from "./utils/getRandomIndex";
 import { merge } from "./utils/merge";
 import { Dropdown } from "./shared/Dropdown";
+import { useToken } from "./hooks/useToken";
+import { tokenContext } from "./shared/context/tokenContext";
+import { UserContextProvider, userContext } from "./shared/context/userContext";
 
 const LIST = [
   { value: 'some1' },
@@ -23,6 +26,7 @@ const LIST = [
 ].map(generateId)
 
 function AppComponent() {
+
   const [list, setList] = React.useState(LIST);
 
   const handleItemClick = (id: string) => {
@@ -31,18 +35,19 @@ function AppComponent() {
   const handleAdd = () => {
     setList(list.concat(generateId({ value: generateRandomString() })))
   }
+  const [token] = useToken();
+  const { Provider } = tokenContext
   return (
-    <header>
-      <Layout>
-        <Header />
-        <Content>
-          <CardsList />
-          {/* <br/>
-          <Text size={20} mobileSize={50}>Lab</Text>
-          <Text size={20} mobileSize={16}>Lab2</Text> */}
-        </Content>
-      </Layout>
-    </header>
+    <tokenContext.Provider value={token}>
+      <UserContextProvider>
+        <Layout>
+          <Header />
+          <Content>
+            <CardsList />
+          </Content>
+        </Layout>
+        </UserContextProvider>
+    </tokenContext.Provider>
   );
 }
 

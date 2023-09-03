@@ -10,7 +10,7 @@ interface Props {
 
 
 export function UserBlock({ avatarSrc, username }: Props) {
-  let link="https://www.reddit.com/api/v1/authorize?client_id=BjQAhAH1jYJyQGM9iKE9lA&response_type=code&state=random_string&redirect_uri=http://localhost:3000&duration=permanent&scope=read submit identity"
+  let link="https://www.reddit.com/api/v1/authorize?client_id=BjQAhAH1jYJyQGM9iKE9lA&response_type=code&state=random_string&redirect_uri=http://localhost:3000/auth&duration=permanent&scope=read submit identity"
   
   return (<a className={styles.avatarBox} 
     href={link}>
