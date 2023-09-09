@@ -1,0 +1,48 @@
+import React, { useContext } from "react";
+import { tokenContext } from "../shared/context/tokenContext";
+import axios from "axios";
+
+interface IBestPost {
+    date?: string;
+    id?: string;
+    author?: string;
+    icon_img?: string;
+    created_ups?: string;
+    title?: string;
+    num_comments?: string;
+    thumbnail?:string
+}
+
+export function useBestPosts() {
+    const token = useContext(tokenContext);
+    const [data, setData] = React.useState<IBestPost[]>([]);
+
+    React.useEffect(() => {
+        if (!token || token === "undefined") return;
+        axios
+            .get('https://oauth.reddit.com/best.json?sr_detail=true', {
+                headers: { Authorization: `bearer ${token}` }
+            })
+            .then((resp) => {
+                console.log(resp.data.data);
+                const adaptedResp: IBestPost[] = resp.data.data.children.map((child: any) => ({
+                    author: child.data.author,
+                    icon_img: child.data.sr_detail.icon_img,
+                    thumbnail: child.data.thumbnail,
+                    title: child.data.title,
+                    id:child.data.id,
+                    num_comments:child.data.num_comments,
+
+
+                }));
+
+                setData([...adaptedResp]);
+                console.log('data;',data);
+            })
+            .catch((error) => {
+                console.error('Ошибка при загрузке данных:', error);
+            });
+    }, [token]);
+
+    return data;
+}
