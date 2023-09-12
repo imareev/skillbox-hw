@@ -1,0 +1,16 @@
+.s15 {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+.s15:hover{
+    fill: brown;
+}
+
+.s20 {
+    width: 20px;
+    height: 20px;
+}
+.s20:hover{
+    fill: brown;
+}
