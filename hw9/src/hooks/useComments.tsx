@@ -19,52 +19,49 @@ interface IBestPost {
 
 
 interface IComment {
-    author?: string,
-    league?: string,
-    body?: string,
-    replies?: IComment[] | string;
+    icon_img:string,
+    author: string,
+    league: string,
+    body: string,
+    replies: IComment[] | string;
 }
 
 
 function ParsingComments(resp: any[], adptData: IComment[] = []): IComment[] {
-    let i = 0;
-    console.log("Recursive call", ++i);
-    resp.forEach((child: any) => {
-        const parsedComment: IComment = {
-            author: child.data.author,
-            league: child.data.subreddit,
-            body: child.data.body,
-        };
-        if (child.data.replies !== '' && child.kind !== 'more') {
-            const children = child.data.replies.data.children;
-            parsedComment.replies = ParsingComments(children, adptData);
-        }
-        adptData.push(parsedComment);
+    adptData = resp.map((child: any) => {
+      const parsedComment: IComment = {
+        icon_img:'https://habrastorage.org/r/w48/getpro/habr/avatars/9af/987/8b0/9af9878b02f82d2e0864184d83479017.jpg',
+        author: child.data.author,
+        league: child.data.subreddit,
+        body: child.data.body,
+        replies: (child.data.replies !== '' && child.kind !== 'more') ? ParsingComments(child.data.replies.data.children, adptData) : ''
+      };
+      return parsedComment;
     });
-    console.log("req", adptData);
     return adptData;
-}
+  }
 
 
 
-export function useComments(idComment?: string) {
+export function useComments(idComment?: string){
     const token = useContext(tokenContext);
-    const [data, setData] = React.useState({});
-    const dataPost: IBestPost[] = useContext(bestPostContext)
+    const [data, setData] = React.useState<IComment[]>([]);
     React.useEffect(() => {
         if (!token || token === "undefined") return;
         axios
-            .get(`https://oauth.reddit.com/comments/16fsfce.json`, {
+            .get(`https://oauth.reddit.com/comments/${idComment}.json`, {
                 headers: { Authorization: `bearer ${token}` }
             })
             .then((resp) => {
                 const adptData: IComment[] = ParsingComments(resp.data[1].data.children);
-                console.log('comment', resp)
-                //setData(ParcingComments(resp.data[1].data));
+                console.log('sds',resp)
+                setData([...adptData]);
             })
             .catch((error) => {
                 console.error('Ошибка при загрузке данных:', error);
             });
     }, [token]);
+    
     return data;
+
 }

@@ -14,6 +14,7 @@ export const indexTemplate = (content, token) => `
 <body>
   <div id="react_root">${content}</div>
   <div id="modal_root"></div>
+  <div id="modal_comment_root"></div>
 </body>
 
 </html>

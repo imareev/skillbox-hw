@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './title.css';
 import { Post } from '../../../../Content/Post';
+import { CommentsContextProvider } from '../../../../context/commentsContext';
 
 interface ITitle {
-  title: string
+  title: string,
+  id:string;
 }
 
-export function Title({ title }: ITitle) {
+export function Title({ title,id }: ITitle) {
   
 
   const [isModelOpen, setIsModelOpen] = useState(false);
@@ -18,8 +20,11 @@ export function Title({ title }: ITitle) {
       </a>
 
       {isModelOpen && (
+        <CommentsContextProvider idPost={id}>
        <Post 
        onClose={()=>setIsModelOpen(false)} />
+       </CommentsContextProvider>
+       
       )}
     </h2>
   );

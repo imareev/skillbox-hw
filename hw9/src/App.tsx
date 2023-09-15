@@ -27,14 +27,14 @@ function AppComponent() {
       <tokenContext.Provider value={token}>
         <UserContextProvider>
           <BestPostContextProvider>
-            <CommentsContextProvider>
+            
             <Layout>
               <Header />
               <Content>
                 <CardsList />
               </Content> 
             </Layout>
-            </CommentsContextProvider>
+            
           </BestPostContextProvider>
         </UserContextProvider>
       </tokenContext.Provider>

@@ -8,7 +8,6 @@ import { commentsContext } from '../../context/commentsContext';
 
 
 export function SearchBlock() {
-  const {data} = useContext(commentsContext)
   const {iconImg, name}= useContext(userContext)
 
   return (

@@ -37,7 +37,6 @@ export function useBestPosts() {
                 }));
 
                 setData([...adaptedResp]);
-                console.log('data;',data);
             })
             .catch((error) => {
                 console.error('Ошибка при загрузке данных:', error);

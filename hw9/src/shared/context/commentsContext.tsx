@@ -1,14 +1,19 @@
 import React from "react";
 import { useComments } from "../../hooks/useComments";
 
-export const commentsContext = React.createContext<IComment>({});
-
-interface IComment{
-    data?:string
+interface IComment {
+    icon_img: string,
+    author: string,
+    league: string,
+    body: string,
+    replies: IComment[] | string;
 }
 
-export function CommentsContextProvider({ children }: { children: React.ReactNode }) {
-    const data = useComments();
+export const commentsContext = React.createContext<IComment[]>([]);
+
+export function CommentsContextProvider({ children, idPost }: { children: React.ReactNode, idPost: string }) {
+    const data = useComments(idPost);
+
     return (
         <commentsContext.Provider value={data}>
             {children}

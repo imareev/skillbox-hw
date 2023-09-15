@@ -1,12 +1,20 @@
-import React, { ChangeEvent, FormEvent, useContext } from 'react';
+import React, { ChangeEvent, FormEvent, useContext, useState } from 'react';
 import style from './CommentForm.css';
 import { CommentContext } from '../context/commentContext';
 
-interface Props {}
+interface Props {
+  startStr?:string;
+}
 
-export function CommentForm({}: Props) {
+export function CommentForm({startStr}:Props) {
   const { value, onChange } = useContext(CommentContext);
 
+   const [confirmedStr,setConfirmedStr]=React.useState<string>('')
+
+  if(startStr!==undefined){
+    setConfirmedStr(startStr+', ');
+  }
+  
   
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -18,7 +26,7 @@ export function CommentForm({}: Props) {
 
   return (
     <form className={style.form} onSubmit={handleSubmit}>
-      <textarea className={style.input} value={value} onChange={handleChange} />
+      <textarea className={style.input} value={value+confirmedStr} onChange={handleChange} />
       <button type="submit" className={style.button}>
         Комментировать
       </button>

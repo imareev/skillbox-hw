@@ -27,6 +27,7 @@ export function CardsList() {
     <ul className={styles.cardsList}>
       {data.map((item: IBestPost) => (
         <Card
+          id={item.id?item.id:'найди нормальный пост если не пришел id'}
           key={item.id}
           author={item.author || ""}
           icon_img={item.icon_img ? item.icon_img : img}
