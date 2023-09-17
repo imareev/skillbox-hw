@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { tokenContext } from "../shared/context/tokenContext";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootReducer } from "../store";
 
 interface IBestPost {
     date?: string;
@@ -14,7 +16,7 @@ interface IBestPost {
 }
 
 export function useBestPosts() {
-    const token = useContext(tokenContext);
+    const token = useSelector<RootReducer,string>(state=>state.token)
     const [data, setData] = React.useState<IBestPost[]>([]);
 
     React.useEffect(() => {

@@ -1,6 +1,8 @@
 import React, { useContext } from "react"
 import axios from "axios";
 import { tokenContext } from "../shared/context/tokenContext";
+import { useSelector } from "react-redux";
+import { RootReducer } from "../store";
 interface Iprops {
     token: string;
 }
@@ -11,7 +13,7 @@ interface IUserData {
 }
 
 export function useUserData() {
-    const token = useContext(tokenContext);
+    const token = useSelector<RootReducer,string>(state=>state.token)
     const [data, setData] = React.useState({ name: "", iconImg: "" });
     React.useEffect(() => {
         if (!token || token === "undefined") return;

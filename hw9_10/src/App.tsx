@@ -1,45 +1,43 @@
-import React, { useState } from "react";
+import React from "react";
 import { hot } from "react-hot-loader/root";
-import styles from "./header.css";
 import { Layout } from "./shared/Layout";
 import { Header } from "./shared/Header";
-import { Text } from "./shared/Text/Text";
 import "./main.global.css";
 import { Content } from "./shared/Content";
 import { CardsList } from "./shared/CardsList";
 import { useToken } from "./hooks/useToken";
 import { tokenContext } from "./shared/context/tokenContext";
 import { UserContextProvider, userContext } from "./shared/context/userContext";
-import { CommentContext } from "./shared/context/commentContext";
 import { BestPostContextProvider } from "./shared/context/bestPostContext";
-import {CommentsContextProvider} from "./shared/context/commentsContext";
+import { AnyAction, createStore } from "redux";
+import { Provider } from "react-redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { rootReducer, setToken as setToken } from '../src/store'
 
+const store = createStore(rootReducer, composeWithDevTools());
 
 function AppComponent() {
-  const [commentValue, setCommentValue] = useState("");
-
-  const CommentProvider = CommentContext.Provider;
-
+  const TokenProvider = tokenContext.Provider
   const [token] = useToken();
-
+  store.dispatch(setToken(token));
+  //dispatch(updateToken(token));
   return (
-    <CommentProvider value={{ value: commentValue, onChange: setCommentValue }}>
-      <tokenContext.Provider value={token}>
+    <Provider store={store}>
+      <TokenProvider value={token}>
         <UserContextProvider>
           <BestPostContextProvider>
-            
             <Layout>
               <Header />
               <Content>
                 <CardsList />
-              </Content> 
+              </Content>
             </Layout>
-            
           </BestPostContextProvider>
         </UserContextProvider>
-      </tokenContext.Provider>
-    </CommentProvider>
+      </TokenProvider>
+    </Provider>
   );
 }
 
 export const App = hot(() => <AppComponent />);
+

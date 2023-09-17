@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { tokenContext } from "../shared/context/tokenContext";
 import { bestPostContext } from "../shared/context/bestPostContext";
+import { useSelector } from "react-redux";
+import { RootReducer } from "../store";
 
 interface Iprops {
     token: string;
@@ -44,7 +46,7 @@ function ParsingComments(resp: any[], adptData: IComment[] = []): IComment[] {
 
 
 export function useComments(idComment?: string){
-    const token = useContext(tokenContext);
+    const token = useSelector<RootReducer,string>(state=>state.token)
     const [data, setData] = React.useState<IComment[]>([]);
     React.useEffect(() => {
         if (!token || token === "undefined") return;
