@@ -1,0 +1,20 @@
+.publishedLabel {
+    display: none;
+}
+
+.createdAt,
+.createdAt span {
+    color: var(--grey99);
+}
+
+.metaData {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    font-size: 10px;
+    line-height: 12px;
+}
+
+.textContent>*+* {
+    padding: 7px 0 0;
+}
