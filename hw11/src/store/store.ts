@@ -1,5 +1,5 @@
 import { Action, ActionCreator, AnyAction, Reducer } from "redux";
-import { ME_REQUEST, ME_REQUEST_ERROR, ME_REQUEST_SUCCES } from "./me/actions";
+import { ME_REQUEST, ME_REQUEST_ERROR, ME_REQUEST_SUCCESS } from "./me/actions";
 import { MeState, MyAction, meReducer } from "./me/reducer";
 
 export type RootReducer = {
@@ -56,7 +56,7 @@ export const rootReducer: Reducer<RootReducer,TMyAction> = (state = initialState
                 token:action.text
             }
         case ME_REQUEST:
-        case ME_REQUEST_SUCCES:
+        case ME_REQUEST_SUCCESS:
         case ME_REQUEST_ERROR:
         return{
             ...state,

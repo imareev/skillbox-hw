@@ -10,39 +10,40 @@ import { tokenContext } from "./shared/context/tokenContext";
 import { UserContextProvider, userContext } from "./shared/context/userContext";
 import { BestPostContextProvider } from "./shared/context/bestPostContext";
 import { Action, Middleware, applyMiddleware, createStore } from "redux";
-import thunk, { ThunkAction } from 'redux-thunk'
+import thunk  from 'redux-thunk'
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { RootReducer, rootReducer, setToken as setToken } from './store/store'
 
 
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware()));
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 
 
 function AppComponent() {
-  const TokenProvider = tokenContext.Provider
-  const [token] = useToken();
-  store.dispatch(setToken(token));
+  useToken();
   //dispatch(updateToken(token));
   return (
-    <Provider store={store}>
-      <TokenProvider value={token}>
-        <UserContextProvider>
-          <BestPostContextProvider>
-            <Layout>
-              <Header />
-              <Content>
-                <CardsList />
-              </Content>
-            </Layout>
-          </BestPostContextProvider>
-        </UserContextProvider>
-      </TokenProvider>
-    </Provider>
+
+    //<TokenProvider value={token}>
+      <UserContextProvider>
+        <BestPostContextProvider>
+          <Layout>
+            <Header />
+            <Content>
+              <CardsList />
+            </Content>
+          </Layout>
+        </BestPostContextProvider>
+      </UserContextProvider>
+    //</TokenProvider>
   );
 }
 
-export const App = hot(() => <AppComponent />);
+export const App = hot(() => (
+  <Provider store={store}>
+    <AppComponent />
+  </Provider>
+));
 

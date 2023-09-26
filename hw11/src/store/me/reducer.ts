@@ -1,5 +1,5 @@
 import { Reducer } from "react";
-import { IUserData, ME_REQUEST, ME_REQUEST_ERROR, ME_REQUEST_SUCCES, MeRequestAction, MeRequestErrorAction, MeRequestSuccesAction } from "./actions";
+import { IUserData, ME_REQUEST, ME_REQUEST_ERROR, ME_REQUEST_SUCCESS, MeRequestAction, MeRequestErrorAction, MeRequestSuccessAction } from "./actions";
 
 export type MeState = {
     loading: boolean,
@@ -10,7 +10,7 @@ export type MeState = {
 export type MyAction =
     MeRequestAction |
     MeRequestErrorAction |
-    MeRequestSuccesAction
+    MeRequestSuccessAction
 
 export const meReducer: Reducer<MeState, MyAction> = (state, action) => {
     switch (action.type) {
@@ -24,7 +24,7 @@ export const meReducer: Reducer<MeState, MyAction> = (state, action) => {
                 ...state,
                 error: action.error,
             };
-        case ME_REQUEST_SUCCES:
+        case ME_REQUEST_SUCCESS:
             return{
                 ...state,
                 data:action.data
