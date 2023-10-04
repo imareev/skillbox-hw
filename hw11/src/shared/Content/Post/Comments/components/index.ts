@@ -1,1 +1,1 @@
-export { ResponseForm} from './ ResponseForm';
+export * from './ResponseForm';

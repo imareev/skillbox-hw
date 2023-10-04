@@ -16,7 +16,7 @@ interface IBestPost {
 }
 
 export function useBestPosts() {
-    const token = useSelector<RootReducer,string>(state=>state.token)
+    const token = useSelector<RootReducer,string>(state=>state.token.token)
     const [data, setData] = React.useState<IBestPost[]>([]);
 
     React.useEffect(() => {

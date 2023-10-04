@@ -46,7 +46,7 @@ function ParsingComments(resp: any[], adptData: IComment[] = []): IComment[] {
 
 
 export function useComments(idComment?: string){
-    const token = useSelector<RootReducer,string>(state=>state.token)
+    const token = useSelector<RootReducer,string>(state=>state.token.token)
     const [data, setData] = React.useState<IComment[]>([]);
     React.useEffect(() => {
         if (!token || token === "undefined") return;
@@ -56,7 +56,6 @@ export function useComments(idComment?: string){
             })
             .then((resp) => {
                 const adptData: IComment[] = ParsingComments(resp.data[1].data.children);
-                console.log('sds',resp)
                 setData([...adptData]);
             })
             .catch((error) => {
