@@ -1,0 +1,155 @@
+.textContent {
+  display: flex;
+  flex-flow: row wrap;
+
+}
+
+.textContent>*+* {
+  padding: 0;
+}
+
+.verticalbar {
+  position: relative;
+  margin-left: 1.1%;
+  padding-left: 36px;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+
+}
+
+.league {
+  background-color: #D9D9D9;
+  padding: 4px 7px 2px 7px;
+}
+
+.textComment {
+  padding-bottom: 11px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+
+
+}
+
+.verticalbar::before {
+
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background-color: #D9D9D9;
+}
+
+.horizontalDropDown {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+}
+
+.dropdownPoint {
+  padding-top: 5px;
+  display: flex;
+  align-items: center;
+  color: #999999;
+  padding-bottom: 6px;
+  margin-right: 27px;
+}
+
+.metaData {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  font-size: 10px;
+  line-height: 12px;
+
+}
+
+.publishedLabel {
+  display: none;
+}
+
+.createdAt,
+.createdAt span {
+  color: var(--grey99);
+}
+
+@media all and (min-width: 1024px) {
+  .textContent {
+    flex-basis: 540px;
+    order: 1;
+    margin: 0 0 0 38px;
+    flex-flow: column-reverse nowrap;
+    justify-content: center;
+  }
+
+  .textContent>* {
+    flex: 0 0;
+  }
+
+  .metaData {
+    flex-flow: row-reverse nowrap;
+    justify-content: flex-end;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .publishedLabel {
+    display: inline;
+  }
+}
+
+@media all and (min-width: 1540px) {
+  .textContent {
+    flex-basis: 672px;
+  }
+}
+
+.karmaCounter>*+* {
+  padding: 0 0 0 4px;
+}
+
+.karmaValue {
+  color: var(--greyC4);
+  font-size: 12px;
+  line-height: 14px;
+}
+
+svg.down {
+  transform: rotate(180deg);
+}
+
+@media all and (min-width: 1024px) {
+  .karmaCounter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+  }
+
+  .karmaCounter>*+* {
+    padding: 7px 0 0;
+  }
+
+  .karmaValue {
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--black);
+  }
+}
+
+@media all and (min-width: 1540px) {
+  .karmaCounter>button.up:hover>svg>path {
+    fill: var(--green);
+  }
+
+  .karmaCounter>button.down:hover>svg>path {
+    fill: var(--orange);
+  }
+}
