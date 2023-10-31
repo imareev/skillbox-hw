@@ -1,1 +1,1 @@
-export { ResponseForm} from './ ResponseForm';
+export { ResponseForm} from '../components/ResponseForm';
