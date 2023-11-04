@@ -1,1 +1,0 @@
-export { ResponseForm} from './ ResponseForm';
