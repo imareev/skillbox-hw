@@ -6,7 +6,7 @@ import Arrows from './Arrows';
 import Comments from '../Comments';
 import { EIcon, Icon } from '../../../../Icon/Icon';
 import { CommentForm } from '../../../../CommentForm';
-import { ResponseForm } from '../components';
+import { ResponseForm } from './ResponseForm/ResponseForm';
 
 interface IComment {
   icon_img: string,
