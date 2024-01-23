@@ -33,7 +33,7 @@ export function CommentFormContainer({ startStr }: Props) {
   return (
     <CommentForm 
     //value={value}
-    // onChange={handleChange}
+    handleChange={handleChange}
     // onSubmit={handleSubmit}
 
 
