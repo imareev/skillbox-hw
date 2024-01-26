@@ -3,30 +3,14 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import style from './CommentForm.css';
 
-import { makeAutoObservable } from 'mobx';
-import { observer } from 'mobx-react-lite/dist/observer';
 
-class Comment {
-  value = 'mobx';
 
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  updateValue(newValue: string) {
-    this.value = newValue;
-  }
-}
 interface Props1{
   handleChange:any
 }
 const myComment = new Comment();
 
-function handleChange(value: string) {
-  myComment.updateValue(value);
-}
-
-export const CommentForm = observer(({ handleChange }:Props1) => {
+export const CommentForm =({ handleChange }:Props1) => {
   const Schema = Yup.object({
     comment: Yup.string()
       .min(3, 'В строке должно быть больше трёх символов')
@@ -37,7 +21,7 @@ export const CommentForm = observer(({ handleChange }:Props1) => {
     <div>
       <Formik
         initialValues={{
-          comment: myComment.value,
+          comment: '',
         }}
         validationSchema={Schema}
         onSubmit={(values) => {
@@ -64,4 +48,4 @@ export const CommentForm = observer(({ handleChange }:Props1) => {
       </Formik>
     </div>
   );
-});
+};

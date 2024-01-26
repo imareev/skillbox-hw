@@ -14,10 +14,12 @@ import thunk  from 'redux-thunk'
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { RootReducer, rootReducer, setToken as setToken } from './store/store'
+import { RecoilRoot, atom } from "recoil";
 
 
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+
 
 
 
@@ -43,7 +45,9 @@ function AppComponent() {
 
 export const App = hot(() => (
   <Provider store={store}>
+    <RecoilRoot>
     <AppComponent />
+    </RecoilRoot>
   </Provider>
 ));
 

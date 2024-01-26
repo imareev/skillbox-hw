@@ -34,10 +34,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.[tj]sx?$/,
-        use: ["ts-loader"],
-      },
-      {
         test: /\.css$/,
         use: [
           "style-loader",
@@ -51,14 +47,16 @@ module.exports = {
             },
           },
         ],
-        exclude:GLOBAL_CSS_REGEXP
+        exclude: GLOBAL_CSS_REGEXP,
       },
       {
-        test:GLOBAL_CSS_REGEXP,
-        use:['style-loader','css-loader']
-      }
+        test: GLOBAL_CSS_REGEXP,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
+  
+  
   devtool: setupDevtool(),
 
   plugins: IS_DEV? DEV_PLUGINS.concat(COMMON_PLUGINS):COMMON_PLUGINS
